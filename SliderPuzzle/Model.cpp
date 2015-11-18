@@ -14,6 +14,79 @@ std::vector<std::vector<int>> Model::get_board()
 	return board;
 }
 
+bool Model::game_won()
+{
+	return false;
+}
+
+void Model::move_left()
+{
+	for(int i = 0; i < board.size(); ++i)
+	{
+		for(int j = 0; j < board[i].size(); ++j)
+		{
+			if(board[i][j] == 0)
+			{
+				std::vector<int> row = board[i];
+				board[i].clear();
+				row.erase(std::remove(row.begin(), row.end(), 0), row.end());
+				board[i].insert(board[i].end(), row.begin(), row.end());
+				board[i].push_back(0);
+				return;
+			}
+		}
+	}
+}
+
+void Model::move_right()
+{
+	for(int i = 0; i < board.size(); ++i)
+	{
+		for(int j = 0; j < board[i].size(); ++j)
+		{
+			if(board[i][j] == 0)
+			{
+				std::vector<int> row = board[i];
+				row.erase(std::remove(row.begin(), row.end(), 0), row.end());
+				board[i].erase(board[i].begin() + 1, board[i].end());
+				board[i][0] = 0;
+				board[i].insert(board[i].end(), row.begin(), row.end());
+				return;
+			}
+		}
+	}
+}
+
+void Model::move_up()
+{
+	for(int i = 0; i < board.size(); ++i)
+	{
+		for(int j = 0; j < board[i].size(); ++j)
+		{
+			if(board[j][i] == 0)
+			{
+				std::vector<int> col;
+				for(int k = 0; k < board_size; ++k)
+				{
+					col.push_back(board[k][i]);
+				}
+				col.erase(std::remove(col.begin(), col.end(), 0), col.end());
+				for(int l = 0; l < board_size - 1; ++l)
+				{
+					board[i][l] = col[l];
+				}
+				board[i][board_size - 1] = 0;
+				return;
+			}
+		}
+	}
+}
+
+void Model::move_down()
+{
+
+}
+
 void Model::randomize_board_values()
 {
 	int r, length = board_size * board_size;
