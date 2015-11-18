@@ -26,15 +26,25 @@ int main()
 
 void print_board(std::vector<std::vector<int>> board)
 {
-	std::cout << std::endl << "-----------------" << std::endl;
+	std::cout << std::endl << "---------------------" << std::endl;
 	for(auto &row : board)
 	{
 		std::cout << "|";
 		for(auto &value : row)
 		{
-			std::cout << " " << value << " |";
+			if(value == 0)
+			{
+				std::cout << "    |";
+			}
+			else if(value > 9)
+			{
+				std::cout << " " << value << " |";
+			}
+			else
+			{
+				std::cout << " 0" << value << " |";
+			}
 		}
-		std::cout << std::endl;
+		std::cout << std::endl << "---------------------" << std::endl;
 	}
-	std::cout <<  "-----------------" << std::endl;
 }
