@@ -10,9 +10,10 @@ namespace Slider
 	class Model
 	{
 	public:
-		Model(void);
+		Model();
 		std::vector<std::vector<int>> get_board();
 		bool game_won();
+		int get_board_length();
 		void move_left();
 		void move_right();
 		void move_up();

@@ -4,7 +4,7 @@ using Slider::Model;
 
 const int board_size = 4;
 
-Model::Model(void) : board(board_size, std::vector<int>(board_size))
+Model::Model() : board(board_size, std::vector<int>(board_size))
 {
 	randomize_board_values();
 }
@@ -34,6 +34,11 @@ bool Model::game_won()
 	}
 
 	return true;
+}
+
+int Model::get_board_length()
+{
+	return board_size;
 }
 
 void Model::move_left()
