@@ -27,11 +27,10 @@ void Model::move_left()
 		{
 			if(board[i][j] == 0)
 			{
-				std::vector<int> row = board[i];
-				board[i].clear();
-				row.erase(std::remove(row.begin(), row.end(), 0), row.end());
-				board[i].insert(board[i].end(), row.begin(), row.end());
-				board[i].push_back(0);
+				if(j != board_size - 1) {
+					board[i][j] = board[i][j + 1];
+					board[i][j + 1] = 0;
+				}
 				return;
 			}
 		}
@@ -46,11 +45,10 @@ void Model::move_right()
 		{
 			if(board[i][j] == 0)
 			{
-				std::vector<int> row = board[i];
-				row.erase(std::remove(row.begin(), row.end(), 0), row.end());
-				board[i].erase(board[i].begin() + 1, board[i].end());
-				board[i][0] = 0;
-				board[i].insert(board[i].end(), row.begin(), row.end());
+				if(j != 0) {
+					board[i][j] = board[i][j - 1];
+					board[i][j - 1] = 0;
+				}
 				return;
 			}
 		}
@@ -65,17 +63,10 @@ void Model::move_up()
 		{
 			if(board[j][i] == 0)
 			{
-				std::vector<int> col;
-				for(int k = 0; k < board_size; ++k)
-				{
-					col.push_back(board[k][i]);
+				if(j != board_size - 1) {
+					board[j][i] = board[j + 1][i];
+					board[j + 1][i] = 0;
 				}
-				col.erase(std::remove(col.begin(), col.end(), 0), col.end());
-				for(int l = 0; l < board_size - 1; ++l)
-				{
-					board[l][i] = col[l];
-				}
-				board[board_size - 1][i] = 0;
 				return;
 			}
 		}
@@ -90,17 +81,10 @@ void Model::move_down()
 		{
 			if(board[j][i] == 0)
 			{
-				std::vector<int> col;
-				for(int k = 0; k < board_size; ++k)
-				{
-					col.push_back(board[k][i]);
+				if(j != 0) {
+					board[j][i] = board[j - 1][i];
+					board[j - 1][i] = 0;
 				}
-				col.erase(std::remove(col.begin(), col.end(), 0), col.end());
-				for(int l = 1; l < board_size; ++l)
-				{
-					board[l][i] = col[l - 1];
-				}
-				board[0][i] = 0;
 				return;
 			}
 		}
