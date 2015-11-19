@@ -16,7 +16,24 @@ std::vector<std::vector<int>> Model::get_board()
 
 bool Model::game_won()
 {
-	return false;
+	int count = 1;
+	for(int i = 0; i < board_size; ++i)
+	{
+		for(int j = 0; j < board_size; ++j)
+		{
+			if(board[i][j] != count)
+			{
+				return false;
+			}
+			count++;
+			if(count == 16)
+			{
+				return true;
+			}
+		}
+	}
+
+	return true;
 }
 
 void Model::move_left()

@@ -21,7 +21,7 @@ int main()
 		
 	int input = 0;
 	bool playing = true, won = false;
-	while(playing)
+	while(playing && !won)
 	{
 		input = 0;
 
@@ -50,6 +50,12 @@ int main()
 			playing = false;
 			break;
 		}
+	}
+
+	if(won)
+	{
+		std::cout << std::endl << "Awesome job! You won!" << std::endl << std::endl << "Press any key to exit...";
+		input = _getch();
 	}
 
 	return 0;
