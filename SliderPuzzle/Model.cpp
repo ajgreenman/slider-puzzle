@@ -73,9 +73,9 @@ void Model::move_up()
 				col.erase(std::remove(col.begin(), col.end(), 0), col.end());
 				for(int l = 0; l < board_size - 1; ++l)
 				{
-					board[i][l] = col[l];
+					board[l][i] = col[l];
 				}
-				board[i][board_size - 1] = 0;
+				board[board_size - 1][i] = 0;
 				return;
 			}
 		}
@@ -84,7 +84,27 @@ void Model::move_up()
 
 void Model::move_down()
 {
-
+	for(int i = 0; i < board.size(); ++i)
+	{
+		for(int j = 0; j < board[i].size(); ++j)
+		{
+			if(board[j][i] == 0)
+			{
+				std::vector<int> col;
+				for(int k = 0; k < board_size; ++k)
+				{
+					col.push_back(board[k][i]);
+				}
+				col.erase(std::remove(col.begin(), col.end(), 0), col.end());
+				for(int l = 1; l < board_size; ++l)
+				{
+					board[l][i] = col[l - 1];
+				}
+				board[0][i] = 0;
+				return;
+			}
+		}
+	}
 }
 
 void Model::randomize_board_values()
